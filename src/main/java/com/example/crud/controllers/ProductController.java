@@ -5,9 +5,12 @@ import com.example.crud.domain.product.ProductRepository;
 import com.example.crud.domain.product.RequestProduct;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
@@ -39,6 +42,31 @@ public class ProductController {
             product.setPrice_in_cents(data.price_in_cents());
             return ResponseEntity.ok(optionalProduct);
         };
-        return ResponseEntity.notFound().build();
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não encontrado");
+    };
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity deleteProduct(@PathVariable String id) {
+        try {
+            if (!repository.existsById(id)) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto com o ID " + id + " não encontrado");
+            }
+            repository.deleteById(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    };
+
+    @DeleteMapping("/delete-all")
+    @Transactional
+    public ResponseEntity deleteAllProduct() {
+        try {
+            repository.deleteAll();
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     };
 }
