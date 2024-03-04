@@ -1,7 +1,7 @@
 # Simple CRUD
 This repository contains a simple CRUD project built using Java Spring. The aim of this repository is to practice and share how you can build all CRUD Methods using Java Spring.
 
-This project was build during a [live in my Youtube Channel](https://www.youtube.com/watch?v=tP6wtEaCnSI).
+This project was build during a [live in Youtube Channel](https://www.youtube.com/watch?v=tP6wtEaCnSI).
 
 ## Table of Contents
 
@@ -12,18 +12,14 @@ This project was build during a [live in my Youtube Channel](https://www.youtube
 
 ## Installation
 
-1. Clone the repository:
-
-```bash
-$ git clone https://github.com/Fernanda-Kipper/live-crud-java-spring.git
-```
+1. Clone the repository
 
 2. Install dependencies with Maven
 
 ## Usage
 
 1. Start the application with Maven
-2. The API will be accessible at http://localhost:8080
+2. The API will be accessible at http://localhost:8181
 
 
 ## API Endpoints
@@ -37,6 +33,8 @@ POST /product - Register a new data.
 PUT /product - Alter data.
 
 DELETE /product/{id} - Inactivate data.
+
+DELETE /product/delete-all - Delete all data
 ```
 
 ## Database
